@@ -106,7 +106,8 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).pop();
                     },
                     child: const Text(
-                      "Delete"
+                      "Delete",
+                      style: TextStyle(color: Colors.red),
                     ),
                   ),
                 ],
