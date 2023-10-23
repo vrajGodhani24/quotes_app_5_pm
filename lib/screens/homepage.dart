@@ -19,51 +19,141 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Quotas",
-          style: TextStyle(fontStyle: FontStyle.italic),
+    Future<bool> shouldExit() async {
+      bool isBack = false;
+
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Exit an App"),
+          content: const Text("Are you sure to want to Exit an App?"),
+          actions: [
+            OutlinedButton(
+              onPressed: () {
+                setState(() {
+                  isBack = false;
+                });
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "Cancel",
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  isBack = true;
+                });
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "Exit",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
         ),
-        centerTitle: true,
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(12),
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            children: Global.quotes
-                .map(
-                  (e) => Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(10),
-                    height: 155,
+      );
+
+      print(isBack);
+
+      return isBack;
+    }
+
+    return WillPopScope(
+      onWillPop: shouldExit,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Quotas",
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+          centerTitle: true,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showGeneralDialog(
+              context: context,
+              pageBuilder: (context, _, __) {
+                return Container(
+                  padding: const EdgeInsets.all(25),
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 300,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white60,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          e.quote,
-                          style: style(18, Colors.black87),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "- ${e.author}",
-                              style: style(20, Colors.black, FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ],
+                    color: Colors.lightBlueAccent,
+                  ),
+                );
+              },
+            );
+
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text("Delete Photos"),
+                content: const Text("Are you sure to want to delete photos?"),
+                actions: [
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      "Cancel",
                     ),
                   ),
-                )
-                .toList(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      "Delete",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(12),
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            child: Column(
+              children: Global.quotes
+                  .map(
+                    (e) => Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      height: 155,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white60,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.quote,
+                            style: style(18, Colors.black87),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "- ${e.author}",
+                                style: style(20, Colors.black, FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),
