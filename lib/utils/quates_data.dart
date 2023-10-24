@@ -54,4 +54,9 @@ List<Map<String, dynamic>> allQuotes = [
     'quote': 'Not how long, but how well you have lived is the main thing.',
     'author': 'Seneca',
   },
+  {
+    'id': 11,
+    'quote': 'Every problem have a solutions',
+    'author': 'Vraj Godhani',
+  },
 ];

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:quatos_app/model/quotes.dart';
 import 'package:quatos_app/utils/global.dart';
@@ -11,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Random random = Random();
+
   @override
   void initState() {
     super.initState();
@@ -69,24 +73,31 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(fontStyle: FontStyle.italic),
           ),
           centerTitle: true,
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showGeneralDialog(
-              context: context,
-              pageBuilder: (context, _, __) {
-                return Container(
-                  padding: const EdgeInsets.all(25),
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 300,
-                    width: double.infinity,
-                    color: Colors.lightBlueAccent,
+          actions: [
+            IconButton(
+              onPressed: () {
+                int i = random.nextInt(Global.quotes.length);
+
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Quote"),
+                    content: Text(Global.quotes[i].quote),
+                    actions: [
+                      Text(
+                        "- ${Global.quotes[i].author}",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 );
               },
-            );
-
+              icon: const Icon(Icons.format_quote_sharp),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
@@ -119,40 +130,35 @@ class _HomePageState extends State<HomePage> {
         body: Container(
           padding: const EdgeInsets.all(12),
           alignment: Alignment.center,
-          child: SingleChildScrollView(
-            child: Column(
-              children: Global.quotes
-                  .map(
-                    (e) => Container(
-                      margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(10),
-                      height: 155,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white60,
+          child: ListView.builder(
+            itemCount: Global.quotes.length,
+            itemBuilder: (context, i) => Container(
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(10),
+              height: 155,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white60,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    Global.quotes[i].quote,
+                    style: style(18, Colors.black87),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "- ${Global.quotes[i].author}",
+                        style: style(20, Colors.black, FontWeight.bold),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            e.quote,
-                            style: style(18, Colors.black87),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                "- ${e.author}",
-                                style: style(20, Colors.black, FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                  .toList(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
