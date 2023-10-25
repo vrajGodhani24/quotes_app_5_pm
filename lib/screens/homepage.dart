@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Random random = Random();
 
+  bool isList = false;
+
   @override
   void initState() {
     super.initState();
@@ -68,6 +70,14 @@ class _HomePageState extends State<HomePage> {
       onWillPop: shouldExit,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.change_circle),
+            onPressed: () {
+              setState(() {
+                isList = !isList;
+              });
+            },
+          ),
           title: const Text(
             "Quotas",
             style: TextStyle(fontStyle: FontStyle.italic),
@@ -130,37 +140,47 @@ class _HomePageState extends State<HomePage> {
         body: Container(
           padding: const EdgeInsets.all(12),
           alignment: Alignment.center,
-          child: ListView.builder(
-            itemCount: Global.quotes.length,
-            itemBuilder: (context, i) => Container(
-              margin: const EdgeInsets.all(5),
-              padding: const EdgeInsets.all(10),
-              height: 155,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white60,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    Global.quotes[i].quote,
-                    style: style(18, Colors.black87),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "- ${Global.quotes[i].author}",
-                        style: style(20, Colors.black, FontWeight.bold),
+          child: (isList)
+              ? ListView.builder(
+                  itemCount: Global.quotes.length,
+                  itemBuilder: (context, i) => Card(
+                    elevation: 5,
+                    shadowColor: Colors.grey,
+                    child: Card(
+                      child: Container(
+                        height: 70,
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(8),
+                        child: Text(Global.quotes[i].quote),
                       ),
-                    ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                )
+              : Scrollbar(
+                  child: GridView.extent(
+                    maxCrossAxisExtent: 250,
+                    children: Global.quotes
+                        .map(
+                          (e) => Card(
+                            elevation: 5,
+                            shadowColor: Colors.grey,
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.black,
+                              ),
+                              child: ListView(
+                                children: [
+                                  Text(e.quote),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
         ),
       ),
     );
