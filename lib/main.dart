@@ -5,9 +5,10 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
-      darkTheme: ThemeData.dark(useMaterial3: true),
-      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: 'style1',
+      ),
       routes: {
         '/': (context) => const HomePage(),
       },

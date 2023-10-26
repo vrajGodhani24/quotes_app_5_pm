@@ -35,6 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  google_fonts:
+  flutter_slidable:
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
+  fonts:
+    - family: style1
+      fonts:
+        - asset: assets/fonts/Agbalumo-Regular.ttf
+    - family: style2
+      fonts:
+        - asset: assets/fonts/carolingia.ttf
+    - family: style3
+      fonts:
+        - asset: assets/fonts/Stranger back in the Night.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:
