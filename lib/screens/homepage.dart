@@ -206,44 +206,50 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: Global.quotes
                         .map(
-                          (e) => Card(
-                            elevation: 5,
-                            shadowColor: Colors.grey,
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Colors.black,
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    e.quote,
-                                    style: const TextStyle(
-                                        fontSize: 16, color: Colors.white70),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        '- ${e.author}',
-                                        style: GoogleFonts.getFont(
-                                          'Pacifico',
-                                          color: Colors.white70,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                          (e) => InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed('detail', arguments: e);
+                            },
+                            child: Card(
+                              elevation: 5,
+                              shadowColor: Colors.grey,
+                              child: Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.black,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      e.quote,
+                                      style: const TextStyle(
+                                          fontSize: 16, color: Colors.white70),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '- ${e.author}',
+                                          style: GoogleFonts.getFont(
+                                            'Pacifico',
+                                            color: Colors.white70,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          // style: GoogleFonts.pacifico(
+                                          //   color: Colors.white70,
+                                          //   fontSize: 18,
+                                          //   fontWeight: FontWeight.bold,
+                                          // ),
                                         ),
-                                        // style: GoogleFonts.pacifico(
-                                        //   color: Colors.white70,
-                                        //   fontSize: 18,
-                                        //   fontWeight: FontWeight.bold,
-                                        // ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

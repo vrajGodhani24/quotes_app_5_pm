@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quatos_app/screens/detail.dart';
 import 'package:quatos_app/screens/homepage.dart';
 
 void main() {
@@ -11,6 +12,7 @@ void main() {
       ),
       routes: {
         '/': (context) => const HomePage(),
+        'detail': (context) => const Detail(),
       },
     ),
   );
