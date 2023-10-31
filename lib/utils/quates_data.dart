@@ -7,7 +7,7 @@ List<Map<String, dynamic>> allQuotes = [
   {
     'id': 2,
     'quote': "Life is what happens when you're busy making other plans.",
-    'author': 'John Lennon',
+    'author': 'Vraj Godhani',
   },
   {
     'id': 3,
