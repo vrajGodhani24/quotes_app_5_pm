@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quatos_app/model/quotes.dart';
 import 'package:quatos_app/utils/global.dart';
 import 'package:quatos_app/utils/quates_data.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -224,29 +223,24 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    SelectableText(
                                       e.quote,
                                       style: const TextStyle(
                                           fontSize: 16, color: Colors.white70),
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          '- ${e.author}',
-                                          style: GoogleFonts.getFont(
-                                            'Pacifico',
-                                            color: Colors.white70,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                          // style: GoogleFonts.pacifico(
-                                          //   color: Colors.white70,
-                                          //   fontSize: 18,
-                                          //   fontWeight: FontWeight.bold,
-                                          // ),
-                                        ),
-                                      ],
+                                    Text(
+                                      '- ${e.author}',
+                                      style: GoogleFonts.getFont(
+                                        'Pacifico',
+                                        color: Colors.white70,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      // style: GoogleFonts.pacifico(
+                                      //   color: Colors.white70,
+                                      //   fontSize: 18,
+                                      //   fontWeight: FontWeight.bold,
+                                      // ),
                                     ),
                                   ],
                                 ),
